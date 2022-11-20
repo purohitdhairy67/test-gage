@@ -1,10 +1,10 @@
 import "./App.css";
-import AppSkeleton from "./components/AppSkeleton";
+import ProductPage from "./pages/productPage";
 
 const App = () => {
   return (
     <div className="App">
-      <AppSkeleton />
+      <ProductPage />
     </div>
   );
 };
