@@ -77,7 +77,10 @@ const AppSkeleton = ({ children }) => {
         <div className={styles.footer}>
           <p>
             MAMAY Technologies Ltd. | All right reserved © 2022 | val® is
-            register trademark of Valiber Ltd. | <span>www.TasteGAGE.com</span>
+            register trademark of Valiber Ltd. |{" "}
+            <a href="https://www.tastegage.com/" target="_blank">
+              www.TasteGAGE.com
+            </a>
           </p>
         </div>
       </div>

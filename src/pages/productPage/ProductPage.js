@@ -1,15 +1,19 @@
 import React, { useCallback, useEffect, useState } from "react";
 import cx from "classname";
-import ReactPlayer from "react-player";
+import video from "../../assets/Video1.mp4";
+import image from "../../assets/image1.png";
 
 import { fetchProductTypes } from "../../actions/productType.actions";
 import Button from "../../components/Button/Button";
 import styles from "./productPage.module.scss";
+import Loader from "../../components/Loader";
 
 const ProductPage = () => {
   const [data, setData] = useState({});
   const [showDescription, setShowDescription] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  console.log("iasdad", video);
 
   const handleOnClick = useCallback(() => {
     setShowDescription((prevState) => !prevState);
@@ -24,11 +28,11 @@ const ProductPage = () => {
     })();
   }, [setData]);
 
-  return (
+  return !isLoading ? (
     <div className={styles.page}>
       <div className={styles.box1}>
         <div className={styles.imgBox}>
-          <img src={data[0]?.img_url} alt="logo is loading" />
+          <img src={image} alt="logo is loading" />
         </div>
         <div className={styles.box2}>
           <div>
@@ -53,10 +57,14 @@ const ProductPage = () => {
 
       {!showDescription && (
         <div className={styles.box3}>
-          <ReactPlayer url={data[0]?.video_url} height="270px" width="100%" />
+          <video height="270px" width="100%" controls>
+            <source src={video} type="video/mp4" />
+          </video>
         </div>
       )}
     </div>
+  ) : (
+    <Loader />
   );
 };
 
