@@ -18,6 +18,8 @@
 
   .contentBox {
     position: relative;
+    display: flex;
+    flex-direction: column;
     width: 614px;
     height: 618px;
     background: #ffffff;
@@ -47,13 +49,16 @@
       }
     }
 
+    .content {
+      flex: 1;
+    }
+
     .footer {
-      position: absolute;
+      margin-top: 10px;
       width: 100%;
       height: 76px;
       background: #f2f2f2;
       border-radius: 0px 0px 12px 12px;
-      bottom: 0px;
       display: flex;
       align-items: center;
 
@@ -92,4 +97,9 @@
   @media (max-width: 750px) {
     display: block;
   }
+}
+
+.active {
+  background-color: #dc2f21;
+  color: #ffffff;
 }

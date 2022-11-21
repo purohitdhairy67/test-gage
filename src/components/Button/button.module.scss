@@ -14,8 +14,14 @@
   &:hover {
     cursor: pointer;
   }
+
+  @media (max-width: 750px) {
+    font-size: 16px;
+    line-height: 19px;
+  }
 }
 
 .active {
   background: #dc2f21;
+  color: #fff;
 }
