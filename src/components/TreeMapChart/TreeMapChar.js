@@ -4,6 +4,7 @@ import ReactApexChart from "react-apexcharts";
 const TreeMapChart = ({
   data,
   colors,
+  textColors,
   title,
   isToolBarVisible,
   setCurrentSelected,
@@ -12,7 +13,11 @@ const TreeMapChart = ({
     legend: {
       show: false,
     },
-
+    dataLabels: {
+      style: {
+        colors: [(e) => textColors?.[e?.dataPointIndex]],
+      },
+    },
     chart: {
       toolbar: {
         show: isToolBarVisible,
@@ -35,7 +40,6 @@ const TreeMapChart = ({
 
       events: {
         dataPointSelection: (event, chartContext, config) => {
-          console.log("iamas here", config);
           setCurrentSelected(config.dataPointIndex);
         },
       },

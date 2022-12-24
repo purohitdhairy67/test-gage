@@ -8,8 +8,7 @@ import Button from "../../components/Button/Button";
 import styles from "./productPage.module.scss";
 import Loader from "../../components/Loader";
 
-const ProductPage = () => {
-  const [data, setData] = useState({});
+const ProductPage = ({ data }) => {
   const [showDescription, setShowDescription] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -19,40 +18,39 @@ const ProductPage = () => {
     setShowDescription((prevState) => !prevState);
   }, [setShowDescription]);
 
-  useEffect(() => {
-    (async () => {
-      setIsLoading(true);
-      const rawData = await fetchProductTypes();
-      setData(rawData);
-      setIsLoading(false);
-    })();
-  }, [setData]);
-
   return !isLoading ? (
     <div className={styles.page}>
       <div className={styles.box1}>
         <div className={styles.imgBox}>
-          <img src={image} alt="logo is loading" />
+          <img src={data?.image} alt="" />
         </div>
         <div className={styles.box2}>
           <div>
-            <p className={styles.text1}>{data[0]?.name}</p>
-            <p className={styles.text2}>BY: {data[0]?.by}</p>
+            <p className={styles.text1}>{data?.set}</p>
+            <p className={styles.text2}>BY: {data?.createdBy}</p>
             {showDescription && (
-              <div className={cx(styles.text2, styles.descriptionDesktop)}>
-                {data[0].description}
-              </div>
+              <div
+                className={cx(styles.text2, styles.descriptionDesktop)}
+                dangerouslySetInnerHTML={{
+                  __html: data?.about,
+                }}
+              ></div>
             )}
           </div>
 
           <div onClick={handleOnClick} className={styles.btn}>
-            <Button>More</Button>
+            <Button onClick={() => {}}>More</Button>
           </div>
         </div>
       </div>
 
       {showDescription && (
-        <div className={styles.descriptionMobile}>{data[0]?.description}</div>
+        <div
+          className={styles.descriptionMobile}
+          dangerouslySetInnerHTML={{
+            __html: data?.about,
+          }}
+        ></div>
       )}
 
       {!showDescription && (

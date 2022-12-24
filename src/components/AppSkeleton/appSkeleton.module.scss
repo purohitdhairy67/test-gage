@@ -54,23 +54,22 @@
     }
 
     .footer {
-      margin-top: 10px;
       width: 100%;
       height: 76px;
       background: #f2f2f2;
       border-radius: 0px 0px 12px 12px;
       display: flex;
       align-items: center;
+      justify-content: center;
+      padding: 0 2rem;
 
       p {
-        margin: 0 72px 0 42px;
         font-family: "Inter";
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
         line-height: 22px;
         color: #000000;
-
         a {
           color: #1563bf;
 
@@ -78,6 +77,10 @@
             cursor: pointer;
           }
         }
+      }
+
+      @media (max-width: 750px) {
+        padding: 0 1rem;
       }
     }
 

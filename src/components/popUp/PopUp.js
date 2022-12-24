@@ -25,7 +25,7 @@ const PopUp = ({ title, description, bgcol, setShow }) => {
     <div className={styles.wrapper} style={{ color: getCol() }}>
       <div className={styles.content} style={{ backgroundColor: bgcol }}>
         <div onClick={handleOnClick} className={styles.icon}>
-          <Cancle />
+          <Cancle fill={getCol()} />
         </div>
         <div className={styles.title}>{title}Taste Sweetnessi</div>
         <div className={styles.description}>
