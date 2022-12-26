@@ -48,6 +48,9 @@ const App = () => {
         }),
         headers: {
           authorization: "1Da2MVmFWU7QHRWcb5tVwzw4uvxfH1au",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers":
+            "Origin, X-Requested-With, Content-Type, Accept",
         },
       });
       const data = await JSON.parse(res);
