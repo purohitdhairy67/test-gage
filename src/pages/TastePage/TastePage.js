@@ -1,15 +1,18 @@
 import { map } from "lodash";
 import React, { useState } from "react";
+import Loader from "../../components/Loader";
 
 import PopUp from "../../components/popUp/PopUp";
 import TreeMapChart from "../../components/TreeMapChart/TreeMapChar";
 
-const TastePage = ({ data }) => {
+const TastePage = ({ data, isLoading }) => {
   const [currentSelected, setCurrentSelected] = useState(null);
 
   const textColors = map(data, (item) => item?.colorText || "#ffffff");
 
-  return currentSelected === null ? (
+  return isLoading ? (
+    <Loader />
+  ) : currentSelected === null ? (
     <div style={{ height: "100%" }}>
       <TreeMapChart
         data={data}

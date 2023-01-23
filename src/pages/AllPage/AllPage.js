@@ -1,10 +1,11 @@
 import { map } from "lodash";
 import React, { useState } from "react";
+import Loader from "../../components/Loader";
 import PopUp from "../../components/popUp/PopUp";
 
 import TreeMapChart from "../../components/TreeMapChart/TreeMapChar";
 
-const AllPage = ({ data1, data2, data3 }) => {
+const AllPage = ({ data1, data2, data3, isLoading }) => {
   const [currentSelected, setCurrentSelected] = useState(null);
   const [currentColor, setCurrentColor] = useState("#ffffff");
 
@@ -12,7 +13,9 @@ const AllPage = ({ data1, data2, data3 }) => {
   const textColors2 = map(data2, (item) => item?.colorText || "#ffffff");
   const textColors3 = map(data3, (item) => item?.colorText || "#ffffff");
 
-  return currentSelected === null ? (
+  return isLoading ? (
+    <Loader />
+  ) : currentSelected === null ? (
     <div style={{ height: "100%" }}>
       <div>
         <TreeMapChart

@@ -3,15 +3,18 @@
   position: relative;
   width: 80px;
   height: 80px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 .lds-ring div {
   box-sizing: border-box;
   display: block;
   position: absolute;
-  width: 64px;
-  height: 64px;
+  width: 40px;
+  height: 40px;
   margin: 8px;
-  border: 8px solid #000;
+  border: 3px solid #000;
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: #000 transparent transparent transparent;

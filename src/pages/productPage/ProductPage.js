@@ -8,11 +8,8 @@ import Button from "../../components/Button/Button";
 import styles from "./productPage.module.scss";
 import Loader from "../../components/Loader";
 
-const ProductPage = ({ data }) => {
+const ProductPage = ({ data, isLoading }) => {
   const [showDescription, setShowDescription] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  console.log("iasdad", video);
 
   const handleOnClick = useCallback(() => {
     setShowDescription((prevState) => !prevState);
