@@ -9,14 +9,11 @@ import { ROUTES } from "../../constants/routes.constants";
 const AppSkeleton = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { pathname } = location;
+  const { pathname, search } = location;
 
-  const handleBtnClick = useCallback(
-    (routeName) => () => {
-      navigate(routeName);
-    },
-    [navigate]
-  );
+  const handleBtnClick = (routeName) => () => {
+    navigate({ pathname: routeName, search });
+  };
 
   return (
     <div className={styles.container}>

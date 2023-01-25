@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 
 import "./App.css";
 import AppSkeleton from "./components/AppSkeleton/AppSkeleton";
@@ -32,16 +32,36 @@ const getFormattedData = (data, type) => {
     })
   );
 };
+
+export const getQueryParams = (query) => {
+  return query
+    ? (/^[?#]/.test(query) ? query.slice(1) : query)
+        .split("&")
+        .reduce((params, param) => {
+          let [key, value] = param.split("=");
+          params[key] = value
+            ? decodeURIComponent(value.replace(/\+/g, " "))
+            : "";
+          return params;
+        }, {})
+    : {};
+};
+
 const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isAlreadyFetched, setIsAlreadyFetched] = useState(false);
   const [data, setData] = useState({});
 
+  const query = useLocation();
+
   const fetchData = async () => {
     try {
       setIsLoading(true);
+      const queryParams = getQueryParams(query.search);
+      const gageId =
+        queryParams.gageId || "6513003b-ccd4-4db1-b578-65a4f258ac30";
       const res = await axios.get(
-        "https://mamaygage.blob.core.windows.net/gages/6513003b-ccd4-4db1-b578-65a4f258ac30.json"
+        `https://mamaygage.blob.core.windows.net/gages/${gageId}.json`
       );
       const { data } = res || {};
       setIsLoading(false);
