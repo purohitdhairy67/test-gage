@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import cx from "classname";
 import video from "../../assets/Video1.mp4";
 import image from "../../assets/image1.png";
+import videoPoster from "../../assets/videoPoster.png";
 
 import { fetchProductTypes } from "../../actions/productType.actions";
 import Button from "../../components/Button/Button";
@@ -52,7 +53,7 @@ const ProductPage = ({ data, isLoading }) => {
 
       {!showDescription && (
         <div className={styles.box3}>
-          <video height="270px" width="100%" controls>
+          <video height="270px" width="100%" controls poster={videoPoster}>
             <source src={video} type="video/mp4" />
           </video>
         </div>
