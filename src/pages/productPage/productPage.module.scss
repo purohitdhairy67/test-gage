@@ -39,7 +39,7 @@
         font-size: 16px;
         font-weight: 400;
         line-height: 19px;
-        margin-bottom: 1.4rem;
+        margin-bottom: 0.7rem;
       }
     }
   }
@@ -99,5 +99,11 @@
     font-weight: 400;
     margin-top: 6rem;
     line-height: 24px;
+  }
+}
+
+.hover {
+  &:hover {
+    cursor: pointer;
   }
 }

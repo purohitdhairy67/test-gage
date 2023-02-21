@@ -4,19 +4,24 @@ import cx from "classname";
 import styles from "./button.module.scss";
 
 const Button = (props) => {
-  const { children, onClick, className, isActive } = props;
+  const { children, onClick, className, isActive, isDisabled } = props;
 
   const handleOnClick = useCallback(
     (e) => {
       e.preventDefault();
-      onClick();
+      if (!isDisabled) onClick();
     },
-    [onClick]
+    [onClick, isDisabled]
   );
 
   return (
     <button
-      className={cx(styles.btn, className, { [styles.active]: isActive })}
+      className={cx(
+        styles.btn,
+        className,
+        { [styles.active]: isActive },
+        { [styles.isDisabled]: isDisabled }
+      )}
       onClick={handleOnClick}
     >
       {children}

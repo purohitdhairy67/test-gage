@@ -12,7 +12,7 @@ import OdorPage from "./pages/OdorPage";
 import ProductPage from "./pages/productPage";
 import TastePage from "./pages/TastePage/TastePage";
 
-import { filter, map } from "lodash";
+import { filter, map, orderBy, round, sortBy } from "lodash";
 
 const ITEM_TYPES = {
   TASTE: "Taste",
@@ -25,7 +25,7 @@ const getFormattedData = (data, type) => {
     filter(data.sensations, (item) => item?.sensationType === type),
     (item) => ({
       ...item,
-      x: item?.sensation,
+      x: `${item?.sensation}, ${round(item?.totalVal, 2)} val®`,
       y: Math.min(item?.totalVal, 3),
       fillColor: item?.color || "#3396F7",
       textFillColor: item?.colorText || "#000000",
@@ -47,6 +47,11 @@ export const getQueryParams = (query) => {
     : {};
 };
 
+const sortData = (data) => {
+  const sensations = orderBy(data.sensations, ["totalVal"], "desc");
+  return { ...data, sensations };
+};
+
 const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isAlreadyFetched, setIsAlreadyFetched] = useState(false);
@@ -65,7 +70,7 @@ const App = () => {
       );
       const { data } = res || {};
       setIsLoading(false);
-      setData(data?.gageInfo);
+      setData(sortData(data?.gageInfo));
       setIsAlreadyFetched(true);
     } catch (error) {
       setIsAlreadyFetched(true);
@@ -79,8 +84,16 @@ const App = () => {
     fetchData();
   }, []);
 
+  const tasteData = getFormattedData(data, ITEM_TYPES.TASTE);
+  const odderData = getFormattedData(data, ITEM_TYPES.ODDOR);
+  const feelData = getFormattedData(data, ITEM_TYPES.FEEL);
+
   return (
-    <AppSkeleton>
+    <AppSkeleton
+      tasteData={tasteData}
+      odderData={odderData}
+      feelData={feelData}
+    >
       <Routes>
         <Route path={ROUTES.HOME} element={<Homepage data={data} />} />
         <Route
@@ -89,30 +102,15 @@ const App = () => {
         />
         <Route
           path={ROUTES.TESTE}
-          element={
-            <TastePage
-              isLoading={isLoading}
-              data={getFormattedData(data, ITEM_TYPES.TASTE)}
-            />
-          }
+          element={<TastePage isLoading={isLoading} data={tasteData} />}
         />
         <Route
           path={ROUTES.ODOR}
-          element={
-            <OdorPage
-              isLoading={isLoading}
-              data={getFormattedData(data, ITEM_TYPES.ODDOR)}
-            />
-          }
+          element={<OdorPage isLoading={isLoading} data={odderData} />}
         />
         <Route
           path={ROUTES.FEEL}
-          element={
-            <FeelPage
-              isLoading={isLoading}
-              data={getFormattedData(data, ITEM_TYPES.FEEL)}
-            />
-          }
+          element={<FeelPage isLoading={isLoading} data={feelData} />}
         />
         <Route
           path={ROUTES.ALL}

@@ -20,7 +20,7 @@ const TreeMapChart = ({
     },
     chart: {
       toolbar: {
-        show: isToolBarVisible,
+        show: false,
       },
       animations: {
         enabled: true,
@@ -44,10 +44,10 @@ const TreeMapChart = ({
         },
       },
     },
-    title: {
-      text: title,
-      align: "center",
-    },
+    // title: {
+    //   text: title,
+    //   align: "center",
+    // },
     colors: colors,
     plotOptions: {
       treemap: {

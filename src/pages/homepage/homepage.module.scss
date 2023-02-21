@@ -4,7 +4,48 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 0 2rem;
+  padding: 0 2rem 0 3rem;
+
+  .containerWithImage {
+    display: flex;
+    align-items: center;
+
+    .image {
+      width: 40%;
+      height: 220px;
+    }
+
+    .content {
+      width: 50%;
+      font-family: "Inter";
+      font-size: 26px;
+      font-weight: 600;
+      line-height: 30px;
+    }
+  }
+
+  .secondpara {
+    padding-left: 3rem;
+    width: 75%;
+    font-family: "Inter";
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+  }
+
+  .box3 {
+    padding-left: 3rem;
+    width: 100%;
+    font-family: "Inter";
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+
+    @media (max-width: 750px) {
+      font-size: 12px;
+      line-height: 16px;
+    }
+  }
 
   .header {
     width: 100%;
@@ -56,7 +97,7 @@
       font-weight: 400;
       line-height: 24px;
       margin-top: 1.2rem;
-      background-color: #b33328;
+      background-color: #c72c40;
       padding: 1rem 1rem;
 
       @media (max-width: 750px) {

@@ -13,7 +13,12 @@ const TastePage = ({ data, isLoading }) => {
   return isLoading ? (
     <Loader />
   ) : currentSelected === null ? (
-    <div style={{ height: "100%" }}>
+    <div
+      style={{
+        height: "100%",
+        width: "100%",
+      }}
+    >
       <TreeMapChart
         data={data}
         title="Tree Map chart for Tastes"

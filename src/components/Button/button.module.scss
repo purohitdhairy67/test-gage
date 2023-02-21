@@ -1,15 +1,18 @@
 .btn {
   width: 118px;
   height: 45px;
-  background: #f0f0f0;
-  border: 1px solid #acacac;
-  border-radius: 4px;
+  background-color: #c72c40;
+  // background: #f0f0f0;
+  // border: 1px solid #acacac;
+  // border-radius: 4px;
+  border: none;
+  border-radius: 0;
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
-  color: #000000;
+  color: #fff;
 
   &:hover {
     cursor: pointer;
@@ -22,6 +25,15 @@
 }
 
 .active {
-  background: #dc2f21;
+  background: #000;
   color: #fff;
+}
+
+.isDisabled {
+  background: rgb(174, 174, 174);
+  color: #fff;
+
+  &:hover {
+    cursor: not-allowed;
+  }
 }
