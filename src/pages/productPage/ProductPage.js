@@ -6,11 +6,20 @@ import videoPoster from "../../assets/videoPoster.png";
 import styles from "./productPage.module.scss";
 import Loader from "../../components/Loader";
 import ScanerIcon from "../../components/Icons/Scaner";
-
-import { QrReader } from "react-qr-reader";
+import { useNavigate } from "react-router-dom";
+import QrReader from "react-qr-reader";
 
 const ProductPage = ({ data, isLoading }) => {
   const [showDescription, setShowDescription] = useState(false);
+  const [qrCode, setQrCode] = useState("");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (qrCode) {
+      navigate(qrCode, { replace: true });
+    }
+  }, [qrCode]);
 
   const handleOnClick = useCallback(() => {
     setShowDescription((prevState) => !prevState);
@@ -136,6 +145,25 @@ const ProductPage = ({ data, isLoading }) => {
             ></iframe>
           </div>
         </div>
+      )}
+      {showDescription && !qrCode && window.innerWidth < 900 && (
+        <QrReader
+          delay={300}
+          onError={(error) => console.log(error)}
+          onScan={(data) => {
+            setQrCode(data);
+            console.log(data, "this is data");
+          }}
+          style={{
+            width: "100%",
+            height: "100%",
+            position: "absolute",
+            top: 100,
+            left: 0,
+            margin: "auto auto",
+          }}
+          facingMode="environment"
+        />
       )}
     </div>
   ) : (

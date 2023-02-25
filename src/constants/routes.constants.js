@@ -5,4 +5,5 @@ export const ROUTES = {
   ODOR: "/odor",
   FEEL: "/feel",
   ALL: "/all",
+  SCANNER: "/scanner",
 };
