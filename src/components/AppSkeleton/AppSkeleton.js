@@ -18,16 +18,22 @@ const AppSkeleton = ({ children, tasteData, odderData, feelData }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.homeBtn}>
+      {/* <div className={styles.homeBtn}>
         <Button
           isActive={pathname === ROUTES.HOME}
           onClick={handleBtnClick(ROUTES.HOME)}
         >
           Home
         </Button>
-      </div>
+      </div> */}
       <div className={styles.contentBox}>
         <div className={styles.header}>
+          {/* <Button
+            isActive={pathname === ROUTES.HOME}
+            onClick={handleBtnClick(ROUTES.HOME)}
+          >
+            Home
+          </Button> */}
           <Button
             className={cx(styles.btn, styles.displayNone)}
             isActive={pathname === ROUTES.HOME}
