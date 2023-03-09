@@ -29,14 +29,8 @@ const PopUp = ({ title, description, bgcol, setShow }) => {
         </div>
         <div className={styles.title}>{title}Taste Sweetnessi</div>
         <div className={styles.description}>
-          {description}Sweetness is a basic taste most perceived when eating
-          foods rich in sugars. Sweet tastes are generally regarded as
-          pleasurable. In addition to sugars like sucrose, many other chemical
-          compounds are sweet, including aldehydes, ketones, and sugar alcohols.
-          Some are sweet at very low concentrations, allowing their use as
-          non-caloric sugar substitutes. Such non-sugar sweeteners include
-          saccharin and aspartame. Other compounds, such as miraculin, may alter
-          perception of sweetness itself.
+          {description ||
+            "Sweetness is a basic taste most perceived when eating foods rich in sugars. Sweet tastes are generally regarded as pleasurable. In addition to sugars like sucrose, many other chemical compounds are sweet, including aldehydes, ketones, and sugar alcohols. Some are sweet at very low concentrations, allowing their use as non-caloric sugar substitutes. Such non-sugar sweeteners include saccharin and aspartame. Other compounds, such as miraculin, may alter perception of sweetness itself."}
         </div>
       </div>
     </div>

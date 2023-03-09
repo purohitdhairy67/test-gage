@@ -25,6 +25,18 @@ const ProductPage = ({ data, isLoading }) => {
     setShowDescription((prevState) => !prevState);
   }, [setShowDescription]);
 
+  // checkes if url is from youtube we convert it to youtube embed url ex: https://www.youtube.com/embed/tgbNymZ7vqY
+  const getYoutubeEmbedUrl = (url) => {
+    if (!url) return "";
+    const videoId = url.split("v=")[1];
+    const ampersandPosition = videoId.indexOf("&");
+    const id =
+      ampersandPosition !== -1
+        ? videoId.substring(0, ampersandPosition)
+        : videoId;
+    return `https://www.youtube.com/embed/${id}`;
+  };
+
   return !isLoading ? (
     <div className={styles.page}>
       <div className={styles.box1}>
@@ -103,11 +115,6 @@ const ProductPage = ({ data, isLoading }) => {
       )}
 
       {!showDescription && (
-        // <div className={styles.box3}>
-        //   <video height="270px" width="100%" controls poster={videoPoster}>
-        //     <source src={video} type="video/mp4" />
-        //   </video>
-        // </div>
         <div
           style={{
             width: "100%",
@@ -127,7 +134,11 @@ const ProductPage = ({ data, isLoading }) => {
             }}
           >
             <iframe
-              src="https://share.synthesia.io/embeds/videos/60a960d8-e7e2-4e0e-968e-aa52ac42833e"
+              src={
+                data?.videoUrl
+                  ? getYoutubeEmbedUrl(data?.videoUrl)
+                  : "https://share.synthesia.io/embeds/videos/60a960d8-e7e2-4e0e-968e-aa52ac42833e"
+              }
               loading="lazy"
               title="Synthesia video player"
               allow="encrypted-media; fullscreen;"

@@ -30,6 +30,7 @@ const OdorPage = ({ data, isLoading }) => {
           ? data?.[currentSelected]?.fillColor
           : "#000000"
       }
+      description={data?.[currentSelected]?.sensationDescription}
       setShow={() => setCurrentSelected(null)}
     />
   );

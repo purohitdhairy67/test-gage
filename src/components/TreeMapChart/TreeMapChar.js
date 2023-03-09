@@ -19,8 +19,20 @@ const TreeMapChart = ({
       },
     },
     chart: {
+      // zoom: {
+      //   enabled: true,
+      // },
       toolbar: {
+        // autoSelected: "zoom",
         show: false,
+        // tools: {
+        //   download: true,
+        //   selection: false,
+        //   zoom: false,
+        //   zoomin: true,
+        //   zoomout: true,
+        //   pan: false,
+        // },
       },
       animations: {
         enabled: true,

@@ -30,6 +30,7 @@ const TastePage = ({ data, isLoading }) => {
     </div>
   ) : (
     <PopUp
+      description={data?.[currentSelected]?.sensationDescription}
       bgcol={
         currentSelected !== null
           ? data?.[currentSelected]?.fillColor

@@ -31,6 +31,7 @@ const FeelPage = ({ data, isLoading }) => {
           : "#000000"
       }
       setShow={() => setCurrentSelected(null)}
+      description={data?.[currentSelected]?.sensationDescription}
     />
   );
 };

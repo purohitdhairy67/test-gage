@@ -29,6 +29,7 @@ const getFormattedData = (data, type) => {
       y: Math.min(item?.totalVal, 3),
       fillColor: item?.color || "#3396F7",
       textFillColor: item?.colorText || "#000000",
+      sensationDescription: item?.sensationDescription || "",
     })
   );
 };
