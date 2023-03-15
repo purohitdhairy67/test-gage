@@ -14,6 +14,10 @@ const TastePage = ({ data, isLoading }) => {
 
   console.log(size(data), "taste");
 
+  const addMargin = size(data) <= 4;
+
+  console.log(addMargin);
+
   return isLoading ? (
     <Loader />
   ) : currentSelected === null ? (
@@ -24,8 +28,13 @@ const TastePage = ({ data, isLoading }) => {
         width: "100%",
       }}
     >
-      {size(data) <= "4" && <div className={styles.gap} />}
-      <div style={{ height: "100%", flex: 1 }}>
+      <div
+        style={{
+          height: "100%",
+          flex: 1,
+          marginRight: size(data) <= 4 ? "-37px" : 0,
+        }}
+      >
         <TreeMapChart
           data={data}
           title="Tree Map chart for Tastes"
@@ -34,7 +43,6 @@ const TastePage = ({ data, isLoading }) => {
           textColors={textColors}
         />
       </div>
-      :
     </div>
   ) : data?.[currentSelected]?.sensationDescription ? (
     <PopUp
@@ -54,8 +62,13 @@ const TastePage = ({ data, isLoading }) => {
         width: "100%",
       }}
     >
-      {size(data) <= "4" && <div className={styles.gap} />}
-      <div style={{ height: "100%", flex: 1 }}>
+      <div
+        style={{
+          height: "100%",
+          flex: 1,
+          marginRight: size(data) <= 4 ? "-37px" : 0,
+        }}
+      >
         <TreeMapChart
           data={data}
           title="Tree Map chart for Tastes"
@@ -64,7 +77,6 @@ const TastePage = ({ data, isLoading }) => {
           textColors={textColors}
         />
       </div>
-      :
     </div>
   );
 };

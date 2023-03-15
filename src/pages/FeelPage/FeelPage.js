@@ -22,11 +22,16 @@ const FeelPage = ({ data, isLoading }) => {
     <Loader />
   ) : currentSelected === null ? (
     <div style={{ display: "flex", height: "100%", width: "100%" }}>
-      {size(data) <= 4 && <div className={styles.gap} />}{" "}
-      <div style={{ height: "100%", flex: 1 }}>
+      <div
+        style={{
+          height: "100%",
+          flex: 1,
+          marginRight: size(data) <= 4 ? "-37px" : 0,
+        }}
+      >
         <TreeMapChart
           data={data}
-          title="Tree Map chart for Feels"
+          title="Tree Map chart for Tastes"
           isToolBarVisible
           setCurrentSelected={(v) => setCurrentSelected(v)}
           textColors={textColors}
@@ -51,8 +56,13 @@ const FeelPage = ({ data, isLoading }) => {
         width: "100%",
       }}
     >
-      {size(data) <= "4" && <div className={styles.gap} />}
-      <div style={{ height: "100%", flex: 1 }}>
+      <div
+        style={{
+          height: "100%",
+          flex: 1,
+          marginRight: size(data) <= 4 ? "-37px" : 0,
+        }}
+      >
         <TreeMapChart
           data={data}
           title="Tree Map chart for Tastes"
@@ -61,7 +71,6 @@ const FeelPage = ({ data, isLoading }) => {
           textColors={textColors}
         />
       </div>
-      :
     </div>
   );
 };
