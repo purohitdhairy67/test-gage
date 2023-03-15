@@ -1,16 +1,19 @@
 import React, { useCallback, useEffect, useState } from "react";
-import cx from "classname";
 
-import video from "../../assets/Video1.mp4";
-import videoPoster from "../../assets/videoPoster.png";
-import styles from "./productPage.module.scss";
-import Loader from "../../components/Loader";
-import ScanerIcon from "../../components/Icons/Scaner";
+import cx from "classname";
 import { useNavigate } from "react-router-dom";
 import QrReader from "react-qr-reader";
 
+// import video from "../../assets/Video1.mp4";
+// import videoPoster from "../../assets/videoPoster.png";
+import Loader from "../../components/Loader";
+import ScanerIcon from "../../components/Icons/Scaner";
+
+import styles from "./productPage.module.scss";
+
 const ProductPage = ({ data, isLoading }) => {
   const [showDescription, setShowDescription] = useState(false);
+  const [showQrCode, setShowQrCode] = useState(false);
   const [qrCode, setQrCode] = useState("");
 
   const navigate = useNavigate();
@@ -20,6 +23,10 @@ const ProductPage = ({ data, isLoading }) => {
       navigate(qrCode, { replace: true });
     }
   }, [qrCode]);
+
+  const openQrScanner = () => {
+    setShowQrCode(true);
+  };
 
   const handleOnClick = useCallback(() => {
     setShowDescription((prevState) => !prevState);
@@ -79,14 +86,14 @@ const ProductPage = ({ data, isLoading }) => {
           {!showDescription && (
             <div
               style={{
-                height: "100px",
-                width: "100px",
+                height: "80px",
+                width: "8q0px",
                 display: "flex",
                 alignItems: "flex-start",
                 justifyContent: "flex-start",
                 marginTop: "-12px",
               }}
-              onClick={handleOnClick}
+              onClick={openQrScanner}
               className={styles.hover}
             >
               <ScanerIcon />
@@ -157,7 +164,7 @@ const ProductPage = ({ data, isLoading }) => {
           </div>
         </div>
       )}
-      {showDescription && !qrCode && window.innerWidth < 900 && (
+      {showQrCode && window.innerWidth < 900 && (
         <QrReader
           delay={300}
           onError={(error) => console.log(error)}

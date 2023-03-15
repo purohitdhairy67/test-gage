@@ -1,34 +1,42 @@
-import { map } from "lodash";
 import React, { useState } from "react";
-import Loader from "../../components/Loader";
+import { map, size } from "lodash";
 
+import Loader from "../../components/Loader";
 import PopUp from "../../components/popUp/PopUp";
 import TreeMapChart from "../../components/TreeMapChart/TreeMapChar";
+
+import styles from "./tastePage.module.scss";
 
 const TastePage = ({ data, isLoading }) => {
   const [currentSelected, setCurrentSelected] = useState(null);
 
   const textColors = map(data, (item) => item?.colorText || "#ffffff");
 
+  console.log(size(data), "taste");
+
   return isLoading ? (
     <Loader />
   ) : currentSelected === null ? (
     <div
       style={{
+        display: "flex",
         height: "100%",
         width: "100%",
       }}
     >
-      <TreeMapChart
-        data={data}
-        title="Tree Map chart for Tastes"
-        isToolBarVisible
-        setCurrentSelected={(v) => setCurrentSelected(v)}
-        textColors={textColors}
-      />
+      {size(data) <= "4" && <div className={styles.gap} />}
+      <div style={{ height: "100%", flex: 1 }}>
+        <TreeMapChart
+          data={data}
+          title="Tree Map chart for Tastes"
+          isToolBarVisible
+          setCurrentSelected={(v) => setCurrentSelected(v)}
+          textColors={textColors}
+        />
+      </div>
       :
     </div>
-  ) : (
+  ) : data?.[currentSelected]?.sensationDescription ? (
     <PopUp
       description={data?.[currentSelected]?.sensationDescription}
       bgcol={
@@ -38,6 +46,26 @@ const TastePage = ({ data, isLoading }) => {
       }
       setShow={() => setCurrentSelected(null)}
     />
+  ) : (
+    <div
+      style={{
+        display: "flex",
+        height: "100%",
+        width: "100%",
+      }}
+    >
+      {size(data) <= "4" && <div className={styles.gap} />}
+      <div style={{ height: "100%", flex: 1 }}>
+        <TreeMapChart
+          data={data}
+          title="Tree Map chart for Tastes"
+          isToolBarVisible
+          setCurrentSelected={(v) => setCurrentSelected(v)}
+          textColors={textColors}
+        />
+      </div>
+      :
+    </div>
   );
 };
 

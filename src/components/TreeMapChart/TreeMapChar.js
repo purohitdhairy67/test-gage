@@ -19,6 +19,8 @@ const TreeMapChart = ({
       },
     },
     chart: {
+      width: "100%",
+
       // zoom: {
       //   enabled: true,
       // },
@@ -76,11 +78,13 @@ const TreeMapChart = ({
   ];
 
   return (
+    // <></>
     <ReactApexChart
       options={options}
       series={series}
       type="treemap"
       height={"100%"}
+      width={"100%"}
     />
   );
 };
