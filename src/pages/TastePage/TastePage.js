@@ -46,6 +46,7 @@ const TastePage = ({ data, isLoading }) => {
     </div>
   ) : data?.[currentSelected]?.sensationDescription ? (
     <PopUp
+      title={data?.[currentSelected]?.sensation}
       description={data?.[currentSelected]?.sensationDescription}
       bgcol={
         currentSelected !== null

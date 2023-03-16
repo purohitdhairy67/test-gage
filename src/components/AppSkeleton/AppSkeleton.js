@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import cx from "classname";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -6,11 +6,30 @@ import Button from "../Button/Button";
 import styles from "./appSkeleton.module.scss";
 import { ROUTES } from "../../constants/routes.constants";
 import { isEmpty } from "lodash";
+// import { checkMobile } from "../../helpers/helper";
 
 const AppSkeleton = ({ children, tasteData, odderData, feelData }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { pathname, search } = location;
+  const [image, setImage] = React.useState(null);
+
+  const camarRef = useRef(null);
+
+  const handleCameraClick = () => {
+    camarRef.current.click();
+  };
+
+  const handleInputClick = (target) => {
+    if (target.files) {
+      if (target.files.length !== 0) {
+        const file = target.files[0];
+
+        const newUrl = URL.createObjectURL(file);
+        setImage(newUrl);
+      }
+    }
+  };
 
   const handleBtnClick = (routeName) => () => {
     navigate({ pathname: routeName, search });
@@ -72,17 +91,24 @@ const AppSkeleton = ({ children, tasteData, odderData, feelData }) => {
           >
             Feel
           </Button>
-          {/* <Button
+
+          {window.innerWidth <= 450 && (
+            <Button className={styles.btn} onClick={() => handleCameraClick()}>
+              Scan
+            </Button>
+          )}
+
+          <input
             className={styles.btn}
-            isActive={pathname === ROUTES.ALL}
-            onClick={handleBtnClick(ROUTES.ALL)}
-            isDisabled={
-              isEmpty(odderData) && isEmpty(tasteData) && isEmpty(feelData)
-            }
-          >
-            All
-          </Button> */}
+            style={{ display: "none" }}
+            type="file"
+            accept="image/*"
+            capture="environment"
+            onClick={(e) => handleInputClick(e.target)}
+            ref={camarRef}
+          ></input>
         </div>
+
         <div className={styles.content}>{children}</div>
         <div className={styles.footer}>
           <div className={styles.firstContainer}>

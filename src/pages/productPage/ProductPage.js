@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState, useRef } from "react";
 
 import cx from "classname";
-import { useNavigate } from "react-router-dom";
-import QrReader from "react-qr-reader";
+// import { useNavigate } from "react-router-dom";
+// import QrReader from "react-qr-reader";
 
 // import video from "../../assets/Video1.mp4";
 // import videoPoster from "../../assets/videoPoster.png";
@@ -13,19 +13,46 @@ import styles from "./productPage.module.scss";
 
 const ProductPage = ({ data, isLoading }) => {
   const [showDescription, setShowDescription] = useState(false);
-  const [showQrCode, setShowQrCode] = useState(false);
-  const [qrCode, setQrCode] = useState("");
+  // const [showQrCode, setShowQrCode] = useState(false);
+  // const [qrCode, setQrCode] = useState("");
+  const [image, setImage] = React.useState(null);
 
-  const navigate = useNavigate();
+  const camarRef = useRef(null);
 
-  useEffect(() => {
-    if (qrCode) {
-      navigate(qrCode, { replace: true });
+  // const navigate = useNavigate();
+
+  // useEffect(() => {
+  // if (qrCode) {
+  // navigate(qrCode, { replace: true });
+  //   }
+  // }, [qrCode]);
+
+  const handleCameraClick = () => {
+    // console.log(camarRef, "tt");
+    // console.log(camarRef.current.files, "ff");
+    // if (camarRef.current.files) {
+    //   if (camarRef.current.files.length !== 0) {
+    //     console.log("hi");
+    //     const file = camarRef.current.files[0];
+    //     console.log("hiiiiiiiiiiiiiii2222");
+    //     const newUrl = URL.createObjectURL(file);
+    //     console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii333");
+    //     setImage(newUrl);
+    //   }
+    // }
+
+    camarRef.current.click();
+  };
+
+  const handleInputClick = (target) => {
+    if (target.files) {
+      if (target.files.length !== 0) {
+        const file = target.files[0];
+
+        const newUrl = URL.createObjectURL(file);
+        setImage(newUrl);
+      }
     }
-  }, [qrCode]);
-
-  const openQrScanner = () => {
-    setShowQrCode(true);
   };
 
   const handleOnClick = useCallback(() => {
@@ -83,7 +110,7 @@ const ProductPage = ({ data, isLoading }) => {
             )}
           </div>
 
-          {!showDescription && (
+          {!showDescription && window.innerWidth <= 450 && (
             <div
               style={{
                 height: "80px",
@@ -93,10 +120,18 @@ const ProductPage = ({ data, isLoading }) => {
                 justifyContent: "flex-start",
                 marginTop: "-12px",
               }}
-              onClick={openQrScanner}
+              onClick={handleCameraClick}
               className={styles.hover}
             >
               <ScanerIcon />
+              <input
+                style={{ display: "none" }}
+                type="file"
+                accept="image/*"
+                capture="environment"
+                onChange={(e) => handleInputClick(e.target)}
+                ref={camarRef}
+              ></input>
             </div>
           )}
           {/* <Button onClick={() => {}}>More</Button> */}
@@ -164,7 +199,7 @@ const ProductPage = ({ data, isLoading }) => {
           </div>
         </div>
       )}
-      {showQrCode && window.innerWidth < 900 && (
+      {/* {showQrCode && window.innerWidth < 900 && (
         <QrReader
           delay={300}
           onError={(error) => console.log(error)}
@@ -182,7 +217,7 @@ const ProductPage = ({ data, isLoading }) => {
           }}
           facingMode="environment"
         />
-      )}
+      )} */}
     </div>
   ) : (
     <Loader />

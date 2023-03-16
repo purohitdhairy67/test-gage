@@ -27,7 +27,7 @@ const PopUp = ({ title, description, bgcol, setShow }) => {
         <div onClick={handleOnClick} className={styles.icon}>
           <Cancle fill={getCol()} />
         </div>
-        <div className={styles.title}>{title}Taste Sweetnessi</div>
+        <div className={styles.title}>{title}</div>
         <div className={styles.description}>{description}</div>
       </div>
     </div>

@@ -42,6 +42,7 @@ const OdorPage = ({ data, isLoading }) => {
     </div>
   ) : data?.[currentSelected]?.sensationDescription ? (
     <PopUp
+      title={data?.[currentSelected]?.sensation}
       bgcol={
         currentSelected !== null
           ? data?.[currentSelected]?.fillColor
