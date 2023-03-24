@@ -13,6 +13,7 @@ const TreeMapChart = ({
     legend: {
       show: false,
     },
+
     dataLabels: {
       style: {
         colors: [(e) => textColors?.[e?.dataPointIndex]],
@@ -69,6 +70,20 @@ const TreeMapChart = ({
         enableShades: false,
       },
     },
+
+    tooltip: {
+      enabled: true,
+      x: {
+        show: false,
+      },
+      y: {
+        show: true,
+        formatter: () => "",
+      },
+      z: {
+        show: false,
+      },
+    },
   };
 
   const series = [
@@ -76,7 +91,7 @@ const TreeMapChart = ({
       data,
     },
   ];
-
+  console.log(data, "data");
   return (
     // <></>
     <ReactApexChart

@@ -25,8 +25,12 @@ const getFormattedData = (data, type) => {
     filter(data.sensations, (item) => item?.sensationType === type),
     (item) => ({
       ...item,
-      x: `${item?.sensation}, ${round(item?.totalVal, 2)} val®`,
-      y: Math.min(item?.totalVal, 3),
+      x: `${item?.sensation}, ${
+        item?.totalVal > 1
+          ? Math.round(item?.totalVal)
+          : (item?.totalVal).toFixed(2)
+      } val®`,
+      y: Math.max(item?.totalVal, 0.1),
       fillColor: item?.color || "#3396F7",
       textFillColor: item?.colorText || "#000000",
       sensationDescription: item?.sensationDescription || "",
@@ -113,6 +117,7 @@ const App = () => {
           path={ROUTES.FEEL}
           element={<FeelPage isLoading={isLoading} data={feelData} />}
         />
+
         <Route
           path={ROUTES.ALL}
           element={
