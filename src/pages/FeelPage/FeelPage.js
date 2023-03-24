@@ -17,7 +17,7 @@ const FeelPage = ({ data, isLoading }) => {
   // if (size(data) <= 4) {
   //   setGap(true);
   // }
-
+  console.log(data, "feel");
   return isLoading ? (
     <Loader />
   ) : currentSelected === null ? (
