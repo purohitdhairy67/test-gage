@@ -12,11 +12,7 @@ const TastePage = ({ data, isLoading }) => {
 
   const textColors = map(data, (item) => item?.colorText || "#ffffff");
 
-  console.log(size(data), "taste");
-
   const addMargin = size(data) <= 4;
-
-  console.log(addMargin);
 
   return isLoading ? (
     <Loader />

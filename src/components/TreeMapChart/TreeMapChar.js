@@ -91,7 +91,7 @@ const TreeMapChart = ({
       data,
     },
   ];
-  console.log(data, "data");
+
   return (
     // <></>
     <ReactApexChart
