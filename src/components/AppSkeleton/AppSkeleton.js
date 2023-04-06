@@ -30,7 +30,7 @@ const AppSkeleton = ({ children, tasteData, odderData, feelData }) => {
         if (scannerRef.current) scannerRef.current.stop();
         ref.current.style.pointerEvents = "none";
         if (result.includes("http")) {
-          window.open(result, "_blank");
+          window.location.href = result;
         }
       }
 
@@ -107,7 +107,7 @@ const AppSkeleton = ({ children, tasteData, odderData, feelData }) => {
 
           {window.innerWidth <= 550 && (
             <Button className={styles.btn} onClick={handleCameraClick}>
-              "Scan"
+              Scan
             </Button>
           )}
 
