@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 import styles from "./appSkeleton.module.scss";
 import { ROUTES } from "../../constants/routes.constants";
-import { isEmpty, result } from "lodash";
+import { isEmpty } from "lodash";
 import Cancle from "../Icons/Cancle";
 // import { checkMobile } from "../../helpers/helper";
 
@@ -14,9 +14,6 @@ const AppSkeleton = ({ children, tasteData, odderData, feelData }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { pathname, search } = location;
-  const [image, setImage] = React.useState(null);
-
-  const [startscan, setStartScan] = useState(false);
 
   const handleBtnClick = (routeName) => () => {
     navigate({ pathname: routeName, search });
@@ -24,27 +21,35 @@ const AppSkeleton = ({ children, tasteData, odderData, feelData }) => {
 
   const ref = useRef(null);
   const scannerRef = useRef(null);
+  const closeIconref = useRef(null);
 
   useEffect(() => {
     scannerRef.current = new QrScanner(
       ref.current,
-      (result) => console.log("decoded qr code:", result),
-      {
-        /* your options or returnDetailedScanResult: true if you're not specifying any other options */
+      (result) => {
+        if (scannerRef.current) scannerRef.current.stop();
+        ref.current.style.pointerEvents = "none";
+        if (result.includes("http")) {
+          window.open(result, "_blank");
+        }
       }
+
+      // {
+      //   /* your options or returnDetailedScanResult: true if you're not specifying any other options */
+      // }
     );
   }, []);
 
   //
   // QRCODE
   const handleCameraClick = () => {
-    // camarRef.current.click();
-    setStartScan(!startscan);
+    closeIconref.current.style.display = "block";
+    ref.current.style.pointerEvents = "auto";
     scannerRef.current.start();
   };
 
   return (
-    <div className={styles.container} key={startscan}>
+    <div className={styles.container}>
       {/* <div className={styles.homeBtn}>
         <Button
           isActive={pathname === ROUTES.HOME}
@@ -102,7 +107,7 @@ const AppSkeleton = ({ children, tasteData, odderData, feelData }) => {
 
           {window.innerWidth <= 550 && (
             <Button className={styles.btn} onClick={handleCameraClick}>
-              {startscan ? "Stop Scan" : "Start Scan"}
+              "Scan"
             </Button>
           )}
 
@@ -146,61 +151,48 @@ const AppSkeleton = ({ children, tasteData, odderData, feelData }) => {
       {/* <div
         style={{
           position: "fixed",
-          width: "max(100vw, 100vh)",
-          height: "max(100vw, 100vh)",
-          zIndex: 25,
+          width: "100vw",
+          height: "100vh",
+          zIndex: 26,
           display: startscan ? "block" : "none",
           backgroundColor: "black",
+          top: 0,
+          left: 0,
+          pointerEvents: "none",
+          background: "green",
+          overflow: "hidden",
         }}
       > */}
-      {/* <QrReader
-          facingMode={"environment"}
-          delay={1000}
-          onError={handleError}
-          onScan={handleScan}
-          videoId="idone"
-          ref={qrRef}
-          onResult={handleScan}
-          // chooseDeviceId={()=>selected}
-          // style={{ width: "100%" }}
-
-          style={{
-            width: "100%",
-            height: "100%",
-            backgroundColor: "blue",
-          }}
-          containerStyle={{
-            width: "max(100vw, 100vh)",
-            height: "max(100vw, 100vh)",
-          }}
-        /> */}
       <video
         ref={ref}
         style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100vw",
-          height: "100vh",
-          zIndex: 25,
-          display: startscan ? "block" : "none",
+          position: "fixed",
+          // width: "max(100vw, 100vh)",
+          height: "max(100vw, 100vh)",
+          top: "0",
+          zIndex: 26,
+          pointerEvents: "none",
         }}
-      ></video>
+      />
       {/* </div> */}
 
-      {startscan ? (
-        <div
-          onClick={() => {
-            setStartScan(false);
-            scannerRef.current.stop();
-          }}
-          style={{ position: "fixed", top: "5%", right: "10%", zIndex: 27 }}
-        >
-          <Cancle />
-        </div>
-      ) : (
-        <></>
-      )}
+      <div
+        ref={closeIconref}
+        onClick={() => {
+          ref.current.style.pointerEvents = "none";
+          closeIconref.current.style.display = "none";
+          scannerRef.current.stop();
+        }}
+        style={{
+          position: "fixed",
+          top: "5%",
+          right: "10%",
+          zIndex: 27,
+          display: "none",
+        }}
+      >
+        <Cancle />
+      </div>
     </div>
   );
 };
