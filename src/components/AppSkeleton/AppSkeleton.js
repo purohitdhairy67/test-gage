@@ -1,5 +1,5 @@
-import React, { useCallback, useRef, useState } from "react";
-import { QrReader } from "react-qr-reader";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import QrScanner from "qr-scanner";
 import cx from "classname";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -16,75 +16,32 @@ const AppSkeleton = ({ children, tasteData, odderData, feelData }) => {
   const { pathname, search } = location;
   const [image, setImage] = React.useState(null);
 
-  const camarRef = useRef(null);
-  const qrRef = useRef(null);
-
   const [startscan, setStartScan] = useState(false);
-  const [data, setData] = useState("");
-  const [selected, setSelected] = useState("environment");
-  const [loadingScan, setLoadingScan] = useState(false);
-
-  // QRCODE
-  const handleScan = async (result) => {
-    if (result && result !== "") {
-      setData(result);
-      console.log(`loaded >>>`, result);
-      window.open(result);
-      setStartScan(false);
-    }
-  };
-
-  const handleError = (error) => {
-    console.error(error);
-  };
-
-  const handleCameraClick = () => {
-    // camarRef.current.click();
-    setStartScan(!startscan);
-  };
-
-  const handleInputClick = (target) => {
-    if (target.files) {
-      if (target.files.length !== 0) {
-        const file = target.files[0];
-
-        const newUrl = URL.createObjectURL(file);
-        setImage(newUrl);
-      }
-    }
-  };
 
   const handleBtnClick = (routeName) => () => {
     navigate({ pathname: routeName, search });
   };
 
-  const qrReader = useCallback(() => {
-    if (startscan)
-      return (
-        <QrReader
-          facingMode={"environment"}
-          delay={1000}
-          onError={handleError}
-          onScan={handleScan}
-          videoId="idone"
-          ref={qrRef}
-          onResult={handleScan}
-          // chooseDeviceId={()=>selected}
-          // style={{ width: "100%" }}
+  const ref = useRef(null);
+  const scannerRef = useRef(null);
 
-          style={{
-            width: "100%",
-            height: "100%",
-            backgroundColor: "blue",
-          }}
-          containerStyle={{
-            width: "max(100vw, 100vh)",
-            height: "max(100vw, 100vh)",
-          }}
-        />
-      );
-    else return <></>;
-  }, [startscan]);
+  useEffect(() => {
+    scannerRef.current = new QrScanner(
+      ref.current,
+      (result) => console.log("decoded qr code:", result),
+      {
+        /* your options or returnDetailedScanResult: true if you're not specifying any other options */
+      }
+    );
+  }, []);
+
+  //
+  // QRCODE
+  const handleCameraClick = () => {
+    // camarRef.current.click();
+    setStartScan(!startscan);
+    scannerRef.current.start();
+  };
 
   return (
     <div className={styles.container} key={startscan}>
@@ -186,27 +143,57 @@ const AppSkeleton = ({ children, tasteData, odderData, feelData }) => {
         </div>
       </div>
 
-      <div
+      {/* <div
         style={{
           position: "fixed",
-          // top: "50%",
-          // left: "50%",
           width: "max(100vw, 100vh)",
           height: "max(100vw, 100vh)",
           zIndex: 25,
           display: startscan ? "block" : "none",
           backgroundColor: "black",
         }}
-      >
-        {qrReader()}
-        {/* <Button className={styles.btn1} onClick={handleCameraClick}>
-            {startscan ? "DELETE" : " "}
-          </Button> */}
-      </div>
+      > */}
+      {/* <QrReader
+          facingMode={"environment"}
+          delay={1000}
+          onError={handleError}
+          onScan={handleScan}
+          videoId="idone"
+          ref={qrRef}
+          onResult={handleScan}
+          // chooseDeviceId={()=>selected}
+          // style={{ width: "100%" }}
+
+          style={{
+            width: "100%",
+            height: "100%",
+            backgroundColor: "blue",
+          }}
+          containerStyle={{
+            width: "max(100vw, 100vh)",
+            height: "max(100vw, 100vh)",
+          }}
+        /> */}
+      <video
+        ref={ref}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          zIndex: 25,
+          display: startscan ? "block" : "none",
+        }}
+      ></video>
+      {/* </div> */}
 
       {startscan ? (
         <div
-          onClick={() => setStartScan(false)}
+          onClick={() => {
+            setStartScan(false);
+            scannerRef.current.stop();
+          }}
           style={{ position: "fixed", top: "5%", right: "10%", zIndex: 27 }}
         >
           <Cancle />
