@@ -10,6 +10,8 @@ import styles from "../TastePage/tastePage.module.scss";
 const OdorPage = ({ data, isLoading }) => {
   const [currentSelected, setCurrentSelected] = useState(null);
 
+  console.log(data, "odordata");
+
   const textColors = map(data, (item) => item?.colorText || "#ffffff");
 
   // const [gap, setGap] = useState(false);

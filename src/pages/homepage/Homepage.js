@@ -15,11 +15,11 @@ const Homepage = ({ data }) => {
           A social venture for people to better communicate taste.
         </p>
       </div>
-      <p className={styles.secondpara} style={{ marginTop: "30px" }}>
+      <p className={styles.secondpara} style={{ marginTop: "20px" }}>
         For any support, in vision and with know how please contact us
         mamay@mamay.me
       </p>
-      <p className={styles.box3} style={{ marginTop: "40px" }}>
+      <p className={styles.box3} style={{ marginTop: "20px" }}>
         * All the data that is presented in this app is experimental.
       </p>
       <p className={styles.box3} style={{ paddingLeft: "4rem" }}>
