@@ -123,7 +123,7 @@ const ProductPage = ({ data, isLoading }) => {
               onClick={handleCameraClick}
               className={styles.hover}
             >
-              <ScanerIcon />
+              {/* <ScanerIcon /> */}
               <input
                 style={{ display: "none" }}
                 type="file"
