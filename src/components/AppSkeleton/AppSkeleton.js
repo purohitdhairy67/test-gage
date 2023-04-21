@@ -124,11 +124,17 @@ const AppSkeleton = ({ children, tasteData, odderData, feelData }) => {
 
         <div className={cx(styles.content)}>{children}</div>
         <div className={cx(styles.footer)}>
-          <div className={styles.firstContainer}>
+          <div
+            className={styles.firstContainer}
+            onClick={handleBtnClick(ROUTES.HOME)}
+          >
             <p className={styles.title}> MAMAY </p>
             <p className={styles.content}>Technologies Ltd.</p>
           </div>
-          <div className={styles.secondContainer}>
+          <div
+            className={styles.secondContainer}
+            onClick={handleBtnClick(ROUTES.HOME)}
+          >
             <p>All right reserved © 2023</p>
             <p>val® is register trademark of Valiber Ltd.</p>
           </div>
