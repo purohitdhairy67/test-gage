@@ -16,13 +16,16 @@ const Homepage = ({ data }) => {
         </p>
       </div>
       <p className={styles.secondpara} style={{ marginTop: "20px" }}>
-        For any support, in vision and with know how please contact us
-        <a href="mailto:mamay@mamay.me" target="_blank">
+        {"For any support, in vision and with know how please contact us "}
+        <a href="mailto:mamay@mamay.me" target="_blank" rel="noreferrer">
           mamay@mamay.me
         </a>
       </p>
-      <p className={styles.box3} style={{ marginTop: "20px" }}>
-        * All the data that is presented in this app is experimental.
+      <p
+        className={`${styles.box3} ${styles.box3WithAstriks}`}
+        style={{ marginTop: "20px", paddingLeft: "4rem" }}
+      >
+        All the data that is presented in this app is experimental.
       </p>
       <p className={styles.box3} style={{ paddingLeft: "4rem" }}>
         MAMAY Technologies Ltd have no responsibility for any use of this data.
@@ -33,6 +36,7 @@ const Homepage = ({ data }) => {
         style={{ fontWeight: "bold", paddingLeft: "4rem", marginTop: "3px" }}
         href="http://www.tastegage.com"
         target="_blank"
+        rel="noreferrer"
       >
         Visit Taste GAGE
       </a>

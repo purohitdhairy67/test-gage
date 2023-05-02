@@ -39,3 +39,16 @@ a {
   height: 45px;
   background-color: rgb(61, 173, 16);
 }
+
+/* we will hide last charater by adding an after element */
+.apexcharts-tooltip-text-y-label::after {
+  content: "";
+  display: block;
+  width: 12.5px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  background-color: rgb(246, 246, 246) !important;
+}
