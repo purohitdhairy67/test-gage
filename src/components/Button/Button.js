@@ -4,7 +4,14 @@ import cx from "classname";
 import styles from "./button.module.scss";
 
 const Button = (props) => {
-  const { children, onClick, className, isActive, isDisabled } = props;
+  const {
+    children,
+    onClick,
+    className,
+    isActive,
+    isDisabled,
+    style = {},
+  } = props;
 
   const handleOnClick = useCallback(
     (e) => {
@@ -23,6 +30,7 @@ const Button = (props) => {
         { [styles.isDisabled]: isDisabled }
       )}
       onClick={handleOnClick}
+      style={style}
     >
       {children}
     </button>

@@ -106,7 +106,13 @@ const AppSkeleton = ({ children, tasteData, odderData, feelData }) => {
           </Button>
 
           {window.innerWidth <= 550 && (
-            <Button className={styles.btn} onClick={handleCameraClick}>
+            <Button
+              className={styles.btn}
+              onClick={handleCameraClick}
+              style={{
+                backgroundColor: "#0000fe",
+              }}
+            >
               Scan
             </Button>
           )}

@@ -28,7 +28,7 @@ const TastePage = ({ data, isLoading }) => {
         style={{
           height: "100%",
           flex: 1,
-          marginRight: size(data) <= 4 ? "-37px" : 0,
+          // marginRight: size(data) <= 4 ? "-37px" : 0,
         }}
       >
         <TreeMapChart
@@ -63,7 +63,7 @@ const TastePage = ({ data, isLoading }) => {
         style={{
           height: "100%",
           flex: 1,
-          marginRight: size(data) <= 4 ? "-37px" : 0,
+          // marginRight: size(data) <= 4 ? "-37px" : 0,
         }}
       >
         <TreeMapChart

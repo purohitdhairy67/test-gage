@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
 
 const TreeMapChart = ({
@@ -9,6 +9,23 @@ const TreeMapChart = ({
   isToolBarVisible,
   setCurrentSelected,
 }) => {
+  useEffect(() => {
+    const chart = document.querySelector(".apexcharts-svg > .apexcharts-inner");
+    if (chart) {
+      const width = chart.getBoundingClientRect().width;
+      const chartWrapper = document.querySelector(".apexcharts-svg");
+      if (chartWrapper) {
+        const diff = chartWrapper.clientWidth - width;
+        //
+        // scale according to diff
+        const scale = 1 + diff / chartWrapper.clientWidth;
+        chartWrapper.style.transform = `translateX(${
+          diff / 2
+        }px) scale(${scale})`;
+      }
+    }
+  }, [data]);
+
   const options = {
     legend: {
       show: false,
