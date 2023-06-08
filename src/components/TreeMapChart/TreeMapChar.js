@@ -1,29 +1,37 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
 
 const TreeMapChart = ({
   data,
   colors,
   textColors,
-  title,
-  isToolBarVisible,
+  // title,
+  // isToolBarVisible,
   setCurrentSelected,
 }) => {
   useEffect(() => {
-    const chart = document.querySelector(".apexcharts-svg > .apexcharts-inner");
-    if (chart) {
-      const width = chart.getBoundingClientRect().width;
-      const chartWrapper = document.querySelector(".apexcharts-svg");
-      if (chartWrapper) {
-        const diff = chartWrapper.clientWidth - width;
-        //
-        // scale according to diff
-        const scale = 1 + diff / chartWrapper.clientWidth;
-        chartWrapper.style.transform = `translateX(${
-          diff / 2
-        }px) scale(${scale})`;
+    const doIt = () => {
+      // if (window.innerWidth < 500) return;
+      const chart = document.querySelector(
+        ".apexcharts-svg > .apexcharts-inner"
+      );
+      if (chart) {
+        const width = chart.getBoundingClientRect().width;
+        const chartWrapper = document.querySelector(".apexcharts-svg");
+        if (chartWrapper) {
+          const diff = chartWrapper.clientWidth - width;
+          //
+          // scale according to diff
+          const scale = 1 + diff / chartWrapper.clientWidth + 0.02;
+          chartWrapper.style.transform = `translateX(${
+            diff / 2
+          }px) scale(${scale})`;
+        }
       }
-    }
+    };
+    doIt();
+    window.addEventListener("resize", doIt);
+    return () => window.removeEventListener("resize", doIt);
   }, [data]);
 
   const options = {
@@ -121,4 +129,4 @@ const TreeMapChart = ({
   );
 };
 
-export default TreeMapChart;
+export default memo(TreeMapChart);

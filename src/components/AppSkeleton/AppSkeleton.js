@@ -16,6 +16,7 @@ const AppSkeleton = ({ children, tasteData, odderData, feelData }) => {
   const { pathname, search } = location;
 
   const handleBtnClick = (routeName) => () => {
+    if (pathname === routeName) return;
     navigate({ pathname: routeName, search });
   };
 
