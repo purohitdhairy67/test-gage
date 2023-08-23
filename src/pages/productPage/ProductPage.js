@@ -7,7 +7,7 @@ import cx from "classname";
 // import video from "../../assets/Video1.mp4";
 // import videoPoster from "../../assets/videoPoster.png";
 import Loader from "../../components/Loader";
-import ScanerIcon from "../../components/Icons/Scaner";
+// import ScanerIcon from "../../components/Icons/Scaner";
 
 import styles from "./productPage.module.scss";
 
@@ -15,6 +15,7 @@ const ProductPage = ({ data, isLoading }) => {
   const [showDescription, setShowDescription] = useState(false);
   // const [showQrCode, setShowQrCode] = useState(false);
   // const [qrCode, setQrCode] = useState("");
+  // eslint-disable-next-line no-unused-vars
   const [image, setImage] = React.useState(null);
 
   const camarRef = useRef(null);

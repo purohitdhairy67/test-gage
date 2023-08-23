@@ -1,18 +1,16 @@
 import React, { useState } from "react";
-import { map, size } from "lodash";
+import { map } from "lodash";
 
 import Loader from "../../components/Loader";
 import PopUp from "../../components/popUp/PopUp";
 import TreeMapChart from "../../components/TreeMapChart/TreeMapChar";
-
-import styles from "./tastePage.module.scss";
 
 const TastePage = ({ data, isLoading }) => {
   const [currentSelected, setCurrentSelected] = useState(null);
 
   const textColors = map(data, (item) => item?.colorText || "#ffffff");
 
-  const addMargin = size(data) <= 4;
+  // const addMargin = size(data) <= 4;
 
   return isLoading ? (
     <Loader />

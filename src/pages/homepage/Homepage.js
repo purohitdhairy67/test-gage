@@ -4,8 +4,8 @@ import image from "./image.png";
 
 import styles from "./homepage.module.scss";
 
-const Homepage = ({ data }) => {
-  const { about } = data;
+const Homepage = () => {
+  // const { about } = data;
 
   return (
     <div className={styles.page}>

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import QrScanner from "qr-scanner";
 import cx from "classname";
 import { useLocation, useNavigate } from "react-router-dom";

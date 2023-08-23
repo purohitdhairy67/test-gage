@@ -12,7 +12,7 @@ import OdorPage from "./pages/OdorPage";
 import ProductPage from "./pages/productPage";
 import TastePage from "./pages/TastePage/TastePage";
 
-import { filter, map, orderBy, round, sortBy } from "lodash";
+import { filter, map, orderBy } from "lodash";
 
 const ITEM_TYPES = {
   TASTE: "Taste",
@@ -87,6 +87,7 @@ const App = () => {
   useEffect(() => {
     if (isAlreadyFetched) return;
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const tasteData = getFormattedData(data, ITEM_TYPES.TASTE);

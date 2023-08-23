@@ -5,8 +5,6 @@ import Loader from "../../components/Loader";
 import PopUp from "../../components/popUp/PopUp";
 import TreeMapChart from "../../components/TreeMapChart/TreeMapChar";
 
-import styles from "../TastePage/tastePage.module.scss";
-
 const FeelPage = ({ data, isLoading }) => {
   const [currentSelected, setCurrentSelected] = useState(null);
 
